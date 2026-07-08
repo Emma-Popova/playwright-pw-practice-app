@@ -59,7 +59,7 @@ await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")'
 
 // This is a combination:
 // we can use combinatins from regular locators and userface locators
-//nb-card in this case is not necessary, only if we are looking for child different elements
+// nb-card in this case is not necessary, only if we are looking for child different elements
 await page.locator('nb-card').getByRole('button', {name: "Sign in"}).first().click();
 
 // The least preferred method for finding child elements is by index: .nth(3) this is the fourth element on the page is the "Submit" button
@@ -84,7 +84,26 @@ test('locating parents element', async({page})=>{
     await page.locator(':text-is("Using the Grid")').locator('..').getByRole('textbox',{name: "Email"}).click();
 });
 
+test('Reusing the locators', async({page})=> {
 
+    //Initial version:
+
+    await page.locator('nb-card').filter({hasText:"Basic form"}).getByRole('textbox',{name: "Email"}).fill('test@test.com');
+    await page.locator('nb-card').filter({hasText:"Basic form"}).getByRole('textbox',{name: "Password"}).fill('Welcome123');
+    await page.locator('nb-card').filter({hasText:"Basic form"}).getByRole('button').click();
+
+
+    //Clear version:
+    
+    const basicForm = page.locator('nb-card').filter({hasText:"Basic form"})
+
+    await basicForm.getByRole('textbox',{name: "Email"}).fill('test@test.com');
+    await basicForm.getByRole('textbox',{name: "Password"}).fill('Welcome123');
+    await basicForm.locator('nb-checkbox').click();
+    await basicForm.getByRole('button').click();
+
+
+});
 
 
 
