@@ -95,12 +95,24 @@ test('Reusing the locators', async({page})=> {
 
     //Clear version:
     
-    const basicForm = page.locator('nb-card').filter({hasText:"Basic form"})
+    // const basicForm = page.locator('nb-card').filter({hasText:"Basic form"});
 
-    await basicForm.getByRole('textbox',{name: "Email"}).fill('test@test.com');
+    // await basicForm.getByRole('textbox',{name: "Email"}).fill('test@test.com');
+    // await basicForm.getByRole('textbox',{name: "Password"}).fill('Welcome123');
+    // await basicForm.locator('nb-checkbox').click();
+    // await basicForm.getByRole('button').click();
+
+     //Even more Clean version:
+    const basicForm = page.locator('nb-card').filter({hasText:"Basic form"});
+    const emailField = basicForm.getByRole('textbox',{name: "Email"});
+
+    await emailField.fill('test@test.com');
     await basicForm.getByRole('textbox',{name: "Password"}).fill('Welcome123');
     await basicForm.locator('nb-checkbox').click();
     await basicForm.getByRole('button').click();
+    
+    //And finally - expect 
+    await expect (emailField).toHaveValue('test@test.com');
 
 
 });
