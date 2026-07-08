@@ -1,0 +1,22 @@
+{
+  "name": "playwright-pw-practice-app",
+  "version": "1.0.0",
+  "description": "UI automation practice with Playwright.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emma-Popova/playwright-pw-practice-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emma-Popova/playwright-pw-practice-app/issues"
+  },
+  "homepage": "https://github.com/Emma-Popova/playwright-pw-practice-app#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1"
+  }
+}
