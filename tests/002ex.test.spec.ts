@@ -48,8 +48,9 @@ test.beforeEach(async({page})=> {
     await page.getByTestId("SignIn").click();
     
     await page.getByTitle('Iot Dashboard').click();
-})
-test('Lokcating child elements', async({page}) => {
+});
+
+test('Locating child elements', async({page}) => {
     
 await page.locator('nb-card nb-radio :text-is("Option 1")').click();
 
@@ -63,7 +64,28 @@ await page.locator('nb-card').getByRole('button', {name: "Sign in"}).first().cli
 
 // The least preferred method for finding child elements is by index: .nth(3) this is the fourth element on the page is the "Submit" button
 await page.locator('nb-card').nth(3).getByRole('button').click();
-})
+
+});
+
+test('locating parents element', async({page})=>{
+    //To find a parent element we can use a text-filter or a locator-filter
+    await page.locator('nb-card', {hasText: "Using the Grid"}).getByRole('textbox',{name: "Email"}).click();
+    await page.locator('nb-card',{has: page.locator('#inputEmail1')}).getByRole('textbox', {name: "Email"}).click();
+
+    //To find a unique parent element we can chain a filter... 
+    await page.locator('nb-card').filter({hasText:"Basic form"}).getByRole('textbox',{name: "Email"}).click();
+    await page.locator('nb-card').filter({has: page.locator('.status0danger')}).getByRole('textbox',{name: "Email"}).click();
+
+    await page.locator('nb-card').filter({has: page.locator('nb-checkbox')}).filter({hasText: "Sign in"})
+        .getByRole('textbox',{name: "Email"}).click();
+
+   // With .. we go up one level in the DOM to find a parent element with XPath and then - the child element
+  //not recommended
+    await page.locator(':text-is("Using the Grid")').locator('..').getByRole('textbox',{name: "Email"}).click();
+});
+
+
+
 
 
 
