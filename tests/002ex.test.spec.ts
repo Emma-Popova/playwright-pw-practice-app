@@ -36,7 +36,7 @@ test.beforeEach(async({page})=> {
 });
     test('User facing locators', async({page}) => {
     await page.getByRole("textbox", {name: "Email"}).first().click();
-    
+
     await page.getByRole("button", {name: "Sign in"}).first().click();
 
     await page.getByLabel("Email").first().click();
@@ -49,6 +49,22 @@ test.beforeEach(async({page})=> {
     
     await page.getByTitle('Iot Dashboard').click();
 })
+test('Lokcating child elements', async({page}) => {
+    
+await page.locator('nb-card nb-radio :text-is("Option 1")').click();
+
+//Or by chaining the elements:
+await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click();
+
+// This is a combination:
+// we can use combinatins from regular locators and userface locators
+//nb-card in this case is not necessary, only if we are looking for child different elements
+await page.locator('nb-card').getByRole('button', {name: "Sign in"}).first().click();
+
+// The least preferred method for finding child elements is by index: .nth(3) this is the fourth element on the page is the "Submit" button
+await page.locator('nb-card').nth(3).getByRole('button').click();
+})
+
 
 
 
