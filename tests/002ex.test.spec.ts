@@ -139,6 +139,32 @@ test('Reusing the locators', async({page})=> {
 
     });
 
+    test('assertions', async({page})=> {
+        const basicFormButton = page.locator('nb-card').filter({hasText:"Basic form"}).locator('button');
+
+    //general assertions 
+        const value = 5
+        expect (value).toEqual(5);
+
+        const text = await basicFormButton.textContent();
+        expect(text).toEqual('Submit');
+
+    //Locator assertans
+        await expect(basicFormButton).toHaveText('Submit');
+
+        // This is implemented like this - waits 5 seconds, checks the first statement, and if the first test fails,
+        // indicates that it failed and moves on to the next one, waits 5 seconds again, and checks that one too....
+        //this is not good practice, but sometimes it can be useful
+        await expect.soft(basicFormButton).toHaveText('Submit');
+        await basicFormButton.click();
+
+    });
+
+    //Auto-Waiting
+    //by default the condition wait is 30 seconds
+
+
+
 
 
 
