@@ -1,6 +1,5 @@
 
 import {test, expect} from '@playwright/test'
-import { delay } from 'rxjs-compat/operator/delay'
 
 test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/')
@@ -14,25 +13,27 @@ test.describe ('Form Layouts page', () => {
 
     })
 
-    test('Input fields', async({page})=>{
+    test ('radio buttons', async({page}) => {
+        const usingTheGridForm = page.locator('nb-card', {hasText: "Using the Grid"})
+
         
-        const usingTheGridEmailInput = page.locator('nb-card', {hasText: "Using the Grid"}).getByRole('textbox',{name: "Email"})
+        await usingTheGridForm.getByLabel('Option 1').check({force: true})
 
-        await usingTheGridEmailInput.fill('test@test.com')
-        await usingTheGridEmailInput.clear()
-        await usingTheGridEmailInput.pressSequentially('test2@test.com', {delay: 500})
-        //await usingTheGridEmailInput.pressSequentially('test2@test.com')
+        //in this case .check() will not work because the button is 'visually-hidden' and so we need to set ({force: true})
+        
+        await usingTheGridForm.getByRole('radio', {name: "Option 1"}).check({force: true}) 
 
-                //await usingTheGridEmailInput.pressSequentially('test2@test.com')
-        //to simulate slow form filling - pressing keys sequentially...delay 0.5
-        //await usingTheGridEmailInput.pressSequentially('test2@test.com', {delay: 500})
+        //generi assertions
+        const radioStatus = await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()
+        expect (radioStatus).toBeTruthy()
+        
+        //locator assertions
+        await expect(usingTheGridForm.getByRole('radio', {name: "Option 1"})).toBeChecked()
 
-        //generic assertion 
-        const inputValue = await usingTheGridEmailInput.inputValue()
-        expect (inputValue).toEqual('test2@test.com')
+        await usingTheGridForm.getByRole('radio', {name: "Option 2"}).check({force: true})       
+        expect(usingTheGridForm.getByRole('radio', {name: "Option 2"}).isChecked()).toBeTruthy()
 
-          //Locator assertion
-        await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
     })
-
 })
+
+
