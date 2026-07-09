@@ -117,6 +117,29 @@ test('Reusing the locators', async({page})=> {
 
 });
 
+    test('extrating values',async({page})=>{
+        //string text value => with the method: .textContent(); 
+        const basicForm = page.locator('nb-card').filter({hasText:"Basic form"});
+        const butonText = await basicForm.locator('button').textContent();
+        expect(butonText).toEqual('Submit');
+
+    //all text value -> and we validate that at least one of these radio buttons has the value "option 2"
+        const allRadioButtonsLabels = await page.locator('nb-radio').allTextContents(); //returns the entire content as an array
+        expect(allRadioButtonsLabels).toContain("Option 1");  // confirms that there is at least one with this content
+
+     //input value => for fields where we enter input data => inputValue()
+        const emailField = basicForm.getByRole('textbox', {name: "Email"});
+        await emailField.fill('test@test.com');
+        const emailValue = await emailField.inputValue();
+        expect (emailValue).toEqual('test@test.com');
+
+    //to find the content of an attribute - placeholder is with "Email"
+        const placeholderValue = await emailField.getAttribute('placeholder');
+        expect (placeholderValue).toEqual('Email');
+
+    });
+
+
 
 
 
