@@ -52,6 +52,25 @@ test.describe ('Form Layouts page', () => {
         }
 
     })
-})
+
+        test('List and Dropdawns', async ({page})=> {
+        const dropDownMenu = page.locator('ngx-header nb-select') //parents el: ngx-header, child el: nb-select
+        await dropDownMenu.click();
+
+        page.getByRole('list') // when the list has UL tag -> parent container for the entire list "list"
+        page.getByRole('listitem') // when the list has LI tag - all elements in an array or list of list elements...
+
+    //   const optionList = page.getByRole('list').locator('nb-option')
+    //but another approach is possible:
+    const optionList = page.locator('nb-option-list nb-option')
+    await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"])
+    await optionList.filter({hasText: "Cosmic"}).click()// We choose from the array with el. to be "Cosmic"
+    const header = page.locator('nb-layout-header')//to check the background color
+    await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)',{ timeout: 8000 })
+
+
+     })
+
+ })
 
 
