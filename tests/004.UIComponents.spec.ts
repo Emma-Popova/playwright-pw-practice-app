@@ -80,8 +80,12 @@ test.describe ('Form Layouts page', () => {
 
     await tooltipCard.getByRole("button", { name: "Top" }).hover()
 
-    })
+    const tooltip = await page.locator("nb-tooltip").textContent()
+    expect(tooltip).toEqual("This is a tooltip")
+   
 
+    })
+    
  })
 
 
