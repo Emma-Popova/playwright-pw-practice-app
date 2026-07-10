@@ -71,6 +71,17 @@ test.describe ('Form Layouts page', () => {
 
      })
 
+        test("tooltips", async ({ page }) => {
+    await page.getByText("Modal & Overlays").click();
+    await page.getByRole("link", { name: "Tooltip" }).click()
+    //await page.getByText("Tooltip").click();
+
+    const tooltipCard = page.locator("nb-card", {hasText: "Tooltip Placements"})
+
+    await tooltipCard.getByRole("button", { name: "Top" }).hover()
+
+    })
+
  })
 
 
