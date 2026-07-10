@@ -85,6 +85,27 @@ test.describe ('Form Layouts page', () => {
    
 
     })
+
+            test("Delete row with confirmation dialog", async ({ page }) => {
+    await page.getByRole("link", { name: "Tables & Data" }).click()
+    await page.getByRole("link", { name: "Smart Table" }).click()
+
+    page.on("dialog", (dialog) => {
+        expect(dialog.message()).toEqual("Are you sure you want to delete?")
+        dialog.accept();
+    });
+
+    await page
+        .getByRole("table")
+        .locator("tr", { hasText: "mdo@gmail.com" })
+        .locator(".nb-trash")
+        .click()
+    await expect(page.locator("table tr").first()).not.toHaveText(
+        "mdo@gmail.com",
+    )
+ 
+    })
+
     
  })
 
