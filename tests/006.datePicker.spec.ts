@@ -5,7 +5,7 @@ test.describe("Test date picker- exersize 1",()=> {
         await page.goto("http://localhost:4200/pages/modal-overlays/tooltip");
     })
 
-    test("Datepicker" ,async({page})=>{
+    test("Date picker-fill" ,async({page})=>{
         await page.getByText("Forms").click();
         await page.getByText("Datepicker").click();
 
@@ -16,4 +16,15 @@ test.describe("Test date picker- exersize 1",()=> {
 
     })
 
+     test("Date picker 2" ,async({page})=>{
+        await page.getByText("Forms").click();
+        await page.getByText("Datepicker").click();
+
+        const calendarInputField = page.getByPlaceholder("Form Picker");
+        await calendarInputField.click();
+
+        await page.locator('[class="day-cell ng-star-inserted"]').getByText("15").click();
+
+        
+     })
 })
