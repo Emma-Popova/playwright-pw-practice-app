@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Test date picker- exersize",()=> {
+test.describe("Test date picker- exercise",()=> {
     test.beforeEach("Open page", async({page})=> {
         await page.goto("http://localhost:4200/pages/modal-overlays/tooltip");
     })
 
-    test("Date picker-exersize 1 - fill" ,async({page})=>{
+    test("Date picker-exercise 1 - fill" ,async({page})=>{
         await page.getByText("Forms").click();
         await page.getByText("Datepicker").click();
 
@@ -16,7 +16,7 @@ test.describe("Test date picker- exersize",()=> {
 
     })
 
-     test("Date picker - exersize 2 - select date" ,async({page})=>{
+     test("Date picker - exercise 2 - select date" ,async({page})=>{
         await page.getByText("Forms").click();
         await page.getByText("Datepicker").click();
 
@@ -33,7 +33,7 @@ test.describe("Test date picker- exersize",()=> {
          
      })
 
-     test("Date picker - exersize 3 - select date from calendar + 1 day", async({page})=> {
+     test("Date picker - exercise 3 - select date from calendar + 1 day", async({page})=> {
         await page.getByText("Forms").click();
         await page.getByText("Datepicker").click();
 
@@ -51,7 +51,7 @@ test.describe("Test date picker- exersize",()=> {
         await expect(calendarInputField).toHaveValue(dateToAssert);
      })
 
-     test("Date picker - exersize 4- select date from calendar + days in the next month", async({page})=> {
+     test("Date picker - exercise 4- select date from calendar + days in the next month", async({page})=> {
         await page.getByText("Forms").click();
         await page.getByText("Datepicker").click();
 
