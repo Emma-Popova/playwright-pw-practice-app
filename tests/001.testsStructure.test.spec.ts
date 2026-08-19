@@ -7,7 +7,7 @@ test.beforeEach(async({page})=> {
 
 test.describe('suite1', ()=> {
     test.beforeEach(async({page})=> {
-        // await page.goto('http://localhost:4200/');
+        //await page.goto('http://localhost:4200/');
         await page.getByText('Modal & Overlays').click();
        
     });

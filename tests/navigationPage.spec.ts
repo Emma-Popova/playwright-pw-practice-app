@@ -8,4 +8,8 @@ test.beforeEach(async({page})=> {
 test('Navigate to form layouts pages', async({page})=>{
     const navigateTo = new NavigationPage(page);
     await navigateTo.formLayouts();
+    await navigateTo.datePickerPage();
+    await navigateTo.toasterPage();
+    await navigateTo.tooltipPage();
+    await navigateTo.smartTablePage();
 })
