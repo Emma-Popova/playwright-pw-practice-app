@@ -6,6 +6,7 @@ export class NavigationPage {
 
     constructor(page: Page){
         this.page = page;
+        
     }
 
     async formLayouts(){
@@ -40,8 +41,9 @@ export class NavigationPage {
         if(expandedState === "false"){
             await groupMenuItem.click();
         }
-
     }
+
+    
 
     
 }

@@ -22,6 +22,8 @@ test.describe ('Form Layouts page', () => {
         //in this case .check() will not work because the button is 'visually-hidden' and so we need to set ({force: true})
         
         await usingTheGridForm.getByRole('radio', {name: "Option 1"}).check({force: true}) 
+        await usingTheGridForm.getByRole('button', {name: "Submit"}).click();
+        
 
         //generi assertions
         const radioStatus = await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()
