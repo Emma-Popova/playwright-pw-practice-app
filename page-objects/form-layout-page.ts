@@ -1,4 +1,5 @@
 import {Page} from "@playwright/test";
+import { step } from "../helpers/test-step-decorator";
 
 export class FormLayoutsPage {
     
@@ -9,6 +10,7 @@ export class FormLayoutsPage {
 
     }
 
+    @step
     async submitUsingTheGridForm(email:string, password: string, optionText: string){
 
         const usingTheGridForm = this.page.locator('nb-card', {hasText: "Using the Grid"});
@@ -23,6 +25,7 @@ export class FormLayoutsPage {
  * @param email Valid test user email
  * @param rememberMeCheckbox Pass `true` to select the "Remember Me" checkbox or `false` to leave it unchecked.
  */
+    @step
     async submitInlineForm(fullName: string, email: string, rememberMeCheckbox: boolean){
         const inlineForm = this.page.locator('nb-card', {hasText: "Inline form"});
         await inlineForm.getByRole('textbox', {name:"Jane Doe"}).fill(fullName);
@@ -33,5 +36,5 @@ export class FormLayoutsPage {
         await inlineForm.getByRole('button', {name: "Submit"}).click();
 
     }
-    
+
 }
