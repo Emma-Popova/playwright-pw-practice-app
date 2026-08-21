@@ -1,13 +1,11 @@
 import {Page} from "@playwright/test";
 import { step } from "../helpers/test-step-decorator";
+import { HelperBase } from "./helper-base";
 
-export class FormLayoutsPage {
-    
-    private readonly page: Page;
+export class FormLayoutsPage extends HelperBase{
     
     constructor(page: Page){
-        this.page = page;
-
+        super(page);
     }
 
     @step
@@ -18,6 +16,8 @@ export class FormLayoutsPage {
         await usingTheGridForm.getByRole('textbox', {name: "Password"}).fill(password);
         await usingTheGridForm.getByLabel('Option 1').check({force: true});
         await usingTheGridForm.getByRole('button', {name: "Sign in"}).click();
+        const toasterMessage = await this.getToastrMessage();
+        console.log(toasterMessage);
     }
 /**
  * This method submits the inline form with the provided full name, email and remember me checkbox can be selected.
